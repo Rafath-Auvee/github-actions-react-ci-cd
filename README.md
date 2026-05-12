@@ -1,4 +1,4 @@
-# GitHub Actions React CI/CD — Module 5 Assignment
+# GitHub Actions React CI/CD - Module 5 Assignment
 
 A React + Vite application with a fully automated CI pipeline using GitHub Actions and a self-hosted runner.
 
@@ -34,7 +34,7 @@ A React + Vite application with a fully automated CI pipeline using GitHub Actio
 
 The pipeline triggers automatically on every push to the `development` branch and runs on a self-hosted runner.
 
-### Workflow File — `.github/workflows/ci.yml`
+### Workflow File: `.github/workflows/ci.yml`
 
 ```yaml
 name: React CI Pipeline
@@ -93,7 +93,7 @@ CI (Continuous Integration) is the practice of automatically testing and buildin
 
 ### What is a Self-Hosted Runner?
 
-A self-hosted runner is your own machine registered with GitHub to execute GitHub Actions pipeline jobs. Instead of using GitHub's cloud-based servers, the jobs run on local hardware — in this case `DESKTOP-145Q014` (Windows x64). This gives full control over the environment, installed software, and available resources. It is useful when pipelines need access to local services, specific hardware, or private network resources.
+A self-hosted runner is your own machine registered with GitHub to execute GitHub Actions pipeline jobs. Instead of using GitHub's cloud-based servers, the jobs run on local hardware - in this case `DESKTOP-145Q014` (Windows x64). This gives full control over the environment, installed software, and available resources. It is useful when pipelines need access to local services, specific hardware, or private network resources.
 
 ### How the Workflow Executes
 
@@ -101,26 +101,26 @@ A self-hosted runner is your own machine registered with GitHub to execute GitHu
 2. GitHub detects the push event and reads `.github/workflows/ci.yml`
 3. GitHub sends the job to the registered self-hosted runner (`DESKTOP-145Q014`)
 4. The runner executes each step in order:
-   - **Checkout code** — clones the repository onto the runner
-   - **Set up Node.js** — installs Node.js v20
-   - **Install dependencies** — runs `npm install`
-   - **Build React app** — runs `npm run build`, producing the `dist/` folder
+   - **Checkout code**: clones the repository onto the runner
+   - **Set up Node.js**: installs Node.js v20
+   - **Install dependencies**: runs `npm install`
+   - **Build React app**: runs `npm run build`, producing the `dist/` folder
 5. GitHub reports the result (success or failure) in the Actions tab
 
 ---
 
-## Pipeline Debugging — Failures Encountered
+## Pipeline Debugging - Failures Encountered
 
-### Run #1 — Deprecated Node.js in Actions
+### Run #1 - Deprecated Node.js in Actions
 - **Cause:** `actions/checkout@v3` and `actions/setup-node@v3` used deprecated Node.js 20 runtime internally
 - **Fix:** Upgraded both actions to `@v4`
 
-### Run #2 — Node.js Version Mismatch
+### Run #2 - Node.js Version Mismatch
 - **Cause:** Workflow specified Node.js 18, but Vite 8 requires Node.js 20.19+
 - **Error:** `ReferenceError: CustomEvent is not defined` at Node.js v18.20.8
 - **Fix:** Changed `node-version: '18'` to `node-version: '20'` in the workflow
 
-### Run #3 — Success
+### Run #3 - Success
 - All steps passed in 1 minute 15 seconds
 
 ---
